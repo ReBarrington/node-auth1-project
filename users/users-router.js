@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+
 const Users = require("./users-model.js");
 const authenticator = require("../auth/authenticator.js");
 
@@ -36,6 +37,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
+  let {cookie} = req.session;
 
   // search for the user using the username
   Users.findBy({ username })
@@ -43,7 +45,8 @@ router.post("/login", (req, res) => {
       // if we find the user, then also check that passwords match
       if (user && bcrypt.compareSync(password, user.password)) {
         req.session.loggedIn = true;
-        res.status(200).json({ message: "Welcome!" });
+        res.status(200).json({ message: "You are logged in!", cookie});
+        // authenticator();
       } else {
         res.status(401).json({ message: "You cannot pass!" });
       }

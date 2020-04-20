@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const session = require("express-session");
 
+
 const usersRouter = require("../users/users-router.js");
 
 const server = express();
@@ -15,7 +16,7 @@ const sessionConfig = {
   cookie: {
     maxAge: 1000 * 60 * 10, // good for 10 mins in ms
     secure: process.env.USE_SECURE_COOKIES || false, // used over https only, set to true in production
-    httpOnly: true, // true means JS on the client cannot access the cooke
+    httpOnly: true, // true means JS on the client cannot access the cookie
   },
 };
 
