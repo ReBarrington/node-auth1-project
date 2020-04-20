@@ -4,7 +4,6 @@ const cors = require("cors");
 const session = require("express-session");
 
 const usersRouter = require("../users/users-router.js");
-const authenticator = require("../auth/authenticator.js");
 
 const server = express();
 

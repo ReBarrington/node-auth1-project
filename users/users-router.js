@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const Users = require("./users-model.js");
+const authenticator = require("../auth/authenticator.js");
 
-router.get("/users", (req, res) => {
+
+router.get("/users", authenticator, (req, res) => {
   Users.get()
     .then(users => {
       res.json(users);
